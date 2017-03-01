@@ -3,6 +3,6 @@
 www/tests
 index.html
 # Config & Database files
-config/key.ini
-database/*.sqlite
+www/config/key.ini
+www/database/*.sqlite
 # End
