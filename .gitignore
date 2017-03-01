@@ -1,3 +1,8 @@
-.history
-.DS_Store
+## Ignore files
+# main file
 www/tests
+index.html
+# Config & Database files
+config/key.ini
+database/*.sqlite
+# End
