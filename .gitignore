@@ -1,6 +1,7 @@
 ## Ignore files
 # main file
 www/tests
+www/demo
 index.html
 # Config & Database files
 www/config/key.ini
