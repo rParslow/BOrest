@@ -63,10 +63,30 @@ $billingTransaction = $response['answer'];
 
 /* I update my database if needed */
 /* Add here your custom code */ 
+include_once('classes/classes.inc.php');
+
+if (!file_exists(DATABASE_FILE)) die("run InitScript");
+$db = new SQLite3(DATABASE_FILE);
+
+
+$sql = "INSERT INTO ipn (status, orderId, xType, shopId, transactions, id0, lastUpdateDate0, full, checked ) 
+  VALUES (
+    'NEW', '"
+    .SQLite3::escapeString($json["orderId"])."', '"
+    .SQLite3::escapeString($json["_type"])."', '"
+    .SQLite3::escapeString($json["shopId"])."', '"
+    .SQLite3::escapeString('trans')."', '"
+    .SQLite3::escapeString($billingTransactionId)."', '"
+    .SQLite3::escapeString($json["transactions"][0]["lastUpdateDate"])."', '"
+    .SQLite3::escapeString(json_encode($json))."', '"
+    .SQLite3::escapeString($checked)
+    ."')";
+$db->exec( $sql );
+
 
 /**
  * Message returned to the IPN caller
- * You can return want you want but
+ * You can return wat you want but
  * HTTP response code should be 200
  */
 print "OK!";

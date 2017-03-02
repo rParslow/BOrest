@@ -15,6 +15,8 @@ function create_ipn_table() {
 
     orderId STRING,
     xType STRING,
+    shopId STRING,
+
     transactions BLOB,
 
     id0 STRING,
