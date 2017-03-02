@@ -29,7 +29,7 @@ function create_ipn_table() {
   );
 
   $db->exec(
-    "CREATE TABLE IF NOT EXISTS payments (
+    "CREATE TABLE IF NOT EXISTS payment (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
 

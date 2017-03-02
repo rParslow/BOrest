@@ -75,13 +75,23 @@ $sql = "INSERT INTO ipn (status, orderId, xType, shopId, transactions, id0, last
     .SQLite3::escapeString($json["orderId"])."', '"
     .SQLite3::escapeString($json["_type"])."', '"
     .SQLite3::escapeString($json["shopId"])."', '"
-    .SQLite3::escapeString('trans')."', '"
+    .SQLite3::escapeString(json_encode($json["transactions"]))."', '"
     .SQLite3::escapeString($billingTransactionId)."', '"
     .SQLite3::escapeString($json["transactions"][0]["lastUpdateDate"])."', '"
     .SQLite3::escapeString(json_encode($json))."', '"
     .SQLite3::escapeString($checked)
     ."')";
 $db->exec( $sql );
+
+$sql = "INSERT INTO payment (status, answer, serverDateTime)
+  VALUES (
+    'NEW', '"
+    .SQLite3::escapeString(json_encode($response))."', '"
+
+    .SQLite3::escapeString('serverDateTime')
+    ."')";
+$db->exec( $sql );
+
 
 
 /**
