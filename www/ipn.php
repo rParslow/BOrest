@@ -23,7 +23,7 @@
  * I initialize the PHP SDK
  */
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/keys.php';
+require_once __DIR__ . '/demo/keysCDR.php';
 
 /** 
  * Initialize the SDK 

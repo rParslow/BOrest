@@ -2,6 +2,7 @@
 # main file
 www/tests
 www/demo
+www/demo2
 index.html
 # Config & Database files
 www/config/key.ini
