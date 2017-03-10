@@ -156,7 +156,7 @@ jQuery(function($){
 
     var prodList = '';
     $( ".product-title" ).each( function( index, element ){
-      prodList += $( this ).text();
+      prodList += $( this ).text() + "(*" +$('.product-quantity input').eq(index).val() + ") ";
       //console.log(index + ":"+ $( this ).text() );
     });
 
