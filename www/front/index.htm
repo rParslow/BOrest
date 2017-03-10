@@ -123,7 +123,7 @@
       <div class="totals-value" id="cart-tax">0.16</div>
     </div>
     <div class="totals-item">
-      <label>Shipping (selfService)</label>
+      <label>Tip (fixed)</label>
       <div class="totals-value" id="cart-shipping">0.10</div>
     </div>
     <div class="totals-item totals-item-total">
@@ -140,25 +140,35 @@
   <script src="assets/js/index.js"></script>
   <script type="text/javascript">
 jQuery(function($){
-  var list = '';
-  $('.product product-details').each(function () {
-    list += ($(this).children('.product-title').html());
-  });
-  
-
-  var nbProducts = 0;
-  $('.product').each(function () {
-    nbProducts += parseFloat($('.product-quantity input').val());
-  });
 
   $("#bpost").click(function(){
-      var amount = $('#cart-total').html()*100;
+    var amount = $('#cart-total').html()*100;
+    var firstName = $('#first_name').val();
+    var lastName = $('#last_name').val();
+    var email = $('#email').val();
+
+    var product = $('.product-title').last().html();
+
+    var nbProducts = 0;
+    $('.product').each(function () {
+      nbProducts += parseFloat($('.product-quantity input').val());
+    });
+
+    var prodList = '';
+    $( ".product-title" ).each( function( index, element ){
+      prodList += $( this ).text();
+      //console.log(index + ":"+ $( this ).text() );
+    });
 
       $.redirect("order.php",
       {
-        name: "johnDoe",
-        email: "demo@pzen.eu",
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
         price: amount.toFixed(0),
+        product: product,
+        nbProducts: nbProducts,
+        prodList: prodList,
         submit: "name"
       },
       "POST" );
