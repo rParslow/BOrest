@@ -25,9 +25,36 @@ $client->setPublicKey($_publicKey);         /* key defined in keys.php file */
 $client->setEndpoint($_endpoint);           /* REST API endpoint defined in keys.php file */
 
 /**
+ * Datas 
+ */
+
+$orderId   = "ORD-234";
+$currency  = "EUR";
+$price     = $_POST['price'];
+$firstName = $_POST['firstName'];
+$lastName  = $_POST['lastName'];
+
+$manualValidation = "YES";
+$captureDelay     = "2";
+$paymentSource    = "MOTO";
+
+/**
  * I create a formToken
  */
-$store = array("amount" => 150, "currency" => "USD");
+$store = array("amount" => $amount, "currency" => $currency);
+
+$store = array("amount"   => $price,
+               "currency" => $currency,
+               "orderId"  => $orderId,
+               "paymentMethodOptions" => array("cardOptions" => array("manualValidation" => $manualValidation, "captureDelay" => $captureDelay,"paymentSource" => $paymentSource)),
+               "customer" => array("email" => "$email", "reference" => "CUST-1234",
+                                   "billingDetails" => array("firstName" => $firstName, "lastName" => "$lastName")
+                                  ),
+               "metadata" => array("product0" => "Chocolate Cookie", "product1" => "French Chocolatine")
+              );
+
+
+
 $response = $client->post("Charge/CreatePayment", $store);
 
 /* I check if there is some errors */
@@ -43,56 +70,14 @@ $formToken = $response["answer"]["formToken"];
 #print "newly generated formToken is " . $formToken . " <br>\n";
 
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Payzen Shopping Cart</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="assets/css/custom.css"/>		
+
+
 		<link rel="stylesheet" type="text/css" href="assets/css/kr-bs.css"/>		
 		<link rel="stylesheet" type="text/css" href="assets/css/button.css"/>		
 		<link rel="stylesheet" type="text/css" href="assets/css/dot_loader.css"/>		
-	</head>
-
-	<body>
-		
-		<nav class="navbar">
-			<div class="container">
-				<a class="navbar-brand" href="#">Payzen store</a>
-				<div class="navbar-right">
-					<div class="container minicart"></div>
-				</div>
-			</div>
-		</nav>
-		
-		<div class="container-fluid breadcrumbBox text-center">
-			<ol class="breadcrumb">
-				<li><a href="#">Review</a></li>
-				<li><a href="./index.html">Order</a></li>
-				<li class="active"><a href="#">Payment</a></li>
-			</ol>
-		</div>
-		
-		<div class="container text-center">
-
-			<div class="col-md-5 col-sm-12">
-				<div class="bigcart"></div>
-				<h1>Payment</h1>
-			</div>
-			
-			<div class="col-md-7 col-sm-12 text-left">
-
-<!--               <ul>
-                    <li class="row">-->
-		<div class="container-fluid breadcrumbBox text-center">
-			<ol class="breadcrumb">
-		
+	
 
 <!-- payment form HTML code -->
-
 <div class="kr-embedded">
     <div class="kr-pan"></div>
     <div class="kr-expiry"></div>
@@ -102,7 +87,7 @@ $formToken = $response["answer"]["formToken"];
     <div class="kr-row-no-gutter">
         <div class="kr-payment-button-wrap">
             <button class="kr-payment-button kr-text-animated">
-                <span class="regular-label">Pay USD 4.65 now!</span>
+                <span class="regular-label">Pay USD now!</span>
 
                 <!-- necessary element to print dots loader -->
                 <div class="waiting-animation">
@@ -152,29 +137,5 @@ $formToken = $response["answer"]["formToken"];
         });
     });
 </script>
-
-
 <!-- payment form HTML code -->
-			</ol>
-		</div>
 
-
-			</div>
-
-		</div>
-
-		<!-- The popover content -->
-
-		<div id="popover" style="display: none">
-			<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="#"><span class="glyphicon glyphicon-remove"></span></a>
-		</div>
-		
-		<!-- JavaScript includes -->
-
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/customjs.js"></script>
-
-	</body>
-</html>

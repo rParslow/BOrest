@@ -17,6 +17,8 @@
 
 
 <body>
+
+
   <h1>Shopping Cart</h1>
 
 <div class="shopping-cart">
@@ -89,6 +91,9 @@
     </div>
     <div class="product-line-price">0.50</div>
   </div>
+</div> <!-- shopping-cart -->
+
+<div class="ordering">
 
   <div class="customer">
    <div class="panel-body">
@@ -135,10 +140,14 @@
   <div id="bpost">
       <button class="checkout" name="button">Checkout</button>
   </div>
+</div> <!-- ordering -->
 
+<div id="krypton">
 </div>
-  <script src="assets/js/index.js"></script>
-  <script type="text/javascript">
+
+<!-- EndScripts -->
+<script src="assets/js/index.js"></script>
+<script type="text/javascript">
 jQuery(function($){
 
   $("#bpost").click(function(){
@@ -161,7 +170,12 @@ jQuery(function($){
       //console.log(index + ":"+ $( this ).text() );
     });
 
-      $.redirect("order.php",
+    $(".shopping-cart").hide();
+    $(".totals").hide();
+    $("#bpost").hide();
+
+      //$.redirect("order.php",
+      $.post("order.php",
       {
         firstName: firstName,
         lastName: lastName,
@@ -171,8 +185,9 @@ jQuery(function($){
         nbProducts: nbProducts,
         prodList: prodList,
         submit: "name"
-      },
-      "POST" );
+      }).done(function( data )
+         { $("#krypton").html( data ); }
+       ) ;
   });
 });
 </script>
