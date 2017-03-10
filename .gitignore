@@ -5,6 +5,6 @@ www/demo
 www/demo2
 index.html
 # Config & Database files
-www/config/key.ini
+www/config/keys.php
 www/database/*.sqlite
 # End
