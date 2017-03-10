@@ -6,14 +6,14 @@
  * https://github.com/LyraNetwork/krypton-php-examples
  */
 
-print_r($_POST);
-die();
+#print_r($_POST);
+#die();
 
 /**
  * I initialize the PHP SDK
  */
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/keys.php';
+require_once __DIR__ . '/../config/keys.php';
 
 /** 
  * Initialize the SDK 
