@@ -150,13 +150,14 @@ jQuery(function($){
     var product = $('.product-title').last().html();
 
     var nbProducts = 0;
-    $('.product').each(function () {
-      nbProducts += parseFloat($('.product-quantity input').val());
+    $('.product input').each(function () {
+      nbProducts += parseFloat($( this ).val());
     });
 
-    var prodList = '';
+    var prodList = [];
     $( ".product-title" ).each( function( index, element ){
-      prodList += $( this ).text() + "(*" +$('.product-quantity input').eq(index).val() + ") ";
+      prodList.push( $( this ).text() + " (*" +$('.product-quantity input').eq(index).val() + ") " );
+      //prodList += $( this ).text() + "(*" +$('.product-quantity input').eq(index).val() + ") ";
       //console.log(index + ":"+ $( this ).text() );
     });
 
