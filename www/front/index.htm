@@ -173,6 +173,10 @@ jQuery(function($){
     $(".shopping-cart").hide();
     $(".totals").hide();
     $("#bpost").hide();
+    $("#first_name").prop('readonly', true);
+    $("#last_name").prop('readonly', true);
+    $("#email").prop('readonly', true);
+    $("h1").text('Payment');
 
       //$.redirect("order.php",
       $.post("order.php",
@@ -180,7 +184,7 @@ jQuery(function($){
         firstName: firstName,
         lastName: lastName,
         email: email,
-        price: amount.toFixed(0),
+        amount: amount.toFixed(0),
         product: product,
         nbProducts: nbProducts,
         prodList: prodList,

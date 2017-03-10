@@ -30,20 +30,21 @@ $client->setEndpoint($_endpoint);           /* REST API endpoint defined in keys
 
 $orderId   = "ORD-234";
 $currency  = "EUR";
-$price     = $_POST['price'];
+$amount    = $_POST['amount'];
+$price     = ($amount/100);
 $firstName = $_POST['firstName'];
 $lastName  = $_POST['lastName'];
 
 $manualValidation = "YES";
 $captureDelay     = "2";
-$paymentSource    = "MOTO";
+$paymentSource    = "EC";
 
 /**
  * I create a formToken
  */
 $store = array("amount" => $amount, "currency" => $currency);
 
-$store = array("amount"   => $price,
+$store = array("amount"   => $amount,
                "currency" => $currency,
                "orderId"  => $orderId,
                "paymentMethodOptions" => array("cardOptions" => array("manualValidation" => $manualValidation, "captureDelay" => $captureDelay,"paymentSource" => $paymentSource)),
@@ -87,7 +88,7 @@ $formToken = $response["answer"]["formToken"];
     <div class="kr-row-no-gutter">
         <div class="kr-payment-button-wrap">
             <button class="kr-payment-button kr-text-animated">
-                <span class="regular-label">Pay USD now!</span>
+                <span class="regular-label">Pay <? echo "$price $currency" ?></span>
 
                 <!-- necessary element to print dots loader -->
                 <div class="waiting-animation">
