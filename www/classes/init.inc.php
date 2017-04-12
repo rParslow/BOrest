@@ -5,7 +5,7 @@ define("DATABASE_FILE", "./database/payzen.sqlite");
 
 // Create the IPN table 
 //
-function create_ipn_table() {
+function create_rest_table() {
   $db  = new SQLite3(DATABASE_FILE);
   $db->exec(
     "CREATE TABLE IF NOT EXISTS ipn (

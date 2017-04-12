@@ -32,7 +32,7 @@ $other_prms = '';
 //
 
 // Build card list from existing PayID records
-$rPayId = $db->query("SELECT * FROM ipn $where ORDER by ts DESC");
+$rPayId = $db->query("SELECT * FROM payid $where ORDER by ts DESC");
 
 
 //
