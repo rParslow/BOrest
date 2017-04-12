@@ -30,14 +30,17 @@ $client->setEndpoint($_endpoint);           /* REST API endpoint defined in keys
 
 $orderId   = "ORD-234";
 $currency  = "EUR";
+$email     = (empty($_POST['email'])) ? "demo@pzen.eu" : $_POST['email'];
 $amount    = $_POST['amount'];
 $price     = ($amount/100);
 $firstName = $_POST['firstName'];
 $lastName  = $_POST['lastName'];
+$prodList  = $_POST['prodList'];
 
 $manualValidation = "YES";
 $captureDelay     = "2";
 $paymentSource    = "EC";
+$register         = "true";
 
 /**
  * I create a formToken
@@ -47,14 +50,15 @@ $store = array("amount" => $amount, "currency" => $currency);
 $store = array("amount"   => $amount,
                "currency" => $currency,
                "orderId"  => $orderId,
-               "paymentMethodOptions" => array("cardOptions" => array("manualValidation" => $manualValidation, "captureDelay" => $captureDelay,"paymentSource" => $paymentSource)),
+               "paymentMethodOptions" => array("cardOptions" => array("manualValidation" => $manualValidation, "captureDelay" => $captureDelay,"paymentSource" => $paymentSource, "register" => $register)),
                "customer" => array("email" => "$email", "reference" => "CUST-1234",
                                    "billingDetails" => array("firstName" => $firstName, "lastName" => "$lastName")
                                   ),
-               "metadata" => array("product0" => "Chocolate Cookie", "product1" => "French Chocolatine")
+               "metadata" => $prodList
               );
 
 
+               #"metadata" => array("product0" => "Chocolate Cookie", "product1" => "French Chocolatine")
 
 $response = $client->post("Charge/CreatePayment", $store);
 
@@ -106,9 +110,6 @@ $formToken = $response["answer"]["formToken"];
 
     </div>
 
-</div>
-
-
 <script src="https://secure.payzen.eu/static/js/krypton-client/V3/stable/kr.min.js?formToken=<? echo $formToken ?>"
     kr-public-key="<? echo $_publicKey ?>"
     kr-language="en"
@@ -116,6 +117,9 @@ $formToken = $response["answer"]["formToken"];
     kr-post-url="paid.php"
     kr-theme="icons-1"
 </script>
+
+
+</div>
 
 <!-- listen events to show and hide the dots loading -->
 <script language="javascript">

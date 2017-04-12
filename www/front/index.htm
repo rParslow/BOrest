@@ -163,9 +163,10 @@ jQuery(function($){
       nbProducts += parseFloat($( this ).val());
     });
 
-    var prodList = [];
+    var prodList = {};
     $( ".product-title" ).each( function( index, element ){
-      prodList.push( $( this ).text() + " (*" +$('.product-quantity input').eq(index).val() + ") " );
+      //prodList.push( { $( this ).text() :  " (*" +$('.product-quantity input').eq(index).val() + ") " } );
+      prodList[ $( this ).text() ] =  " (*" +$('.product-quantity input').eq(index).val() + ") ";
       //prodList += $( this ).text() + "(*" +$('.product-quantity input').eq(index).val() + ") ";
       //console.log(index + ":"+ $( this ).text() );
     });
