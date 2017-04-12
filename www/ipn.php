@@ -69,7 +69,7 @@ if (!file_exists(DATABASE_FILE)) die("run InitScript");
 $db = new SQLite3(DATABASE_FILE);
 
 
-$sql = "INSERT INTO ipn (status, orderId, xType, shopId, transactions, id0, lastUpdateDate0, full, checked ) 
+$sql = "INSERT INTO payid (status, orderId, xType, shopId, transactions, id0, lastUpdateDate0, full, checked ) 
   VALUES (
     'NEW', '"
     .SQLite3::escapeString($json["orderId"])."', '"
