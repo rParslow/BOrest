@@ -92,12 +92,16 @@ $db->exec( $sql );
 //
 
 
+//$sql = "INSERT INTO payment (status, shopId, orderId, isTest, paymentId, paymentMethodType, paymentStatus, operationType, amount, answer, serverDateTime)
+//    .SQLite3::escapeString($json["transactions"][0]["lastUpdateDate"])."', '"
 
-$sql = "INSERT INTO payment (status, shopId, isTest, answer, serverDateTime)
+$sql = "INSERT INTO payment (status, shopId, orderId, isTest, paymentId, answer, serverDateTime)
   VALUES (
     'NEW', '"
     .SQLite3::escapeString($json["shopId"])."', '"
-    .SQLite3::escapeString('true')."', '"
+    .SQLite3::escapeString($json["orderId"])."', '"
+    .SQLite3::escapeString($response['answer']['isTest'])."', '"
+    .SQLite3::escapeString($response['answer']['id'])."', '"
 
     .SQLite3::escapeString(json_encode($response))."', '"
 
