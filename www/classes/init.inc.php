@@ -13,8 +13,8 @@ function create_rest_table() {
     ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     status STRING,
 
-    orderId STRING,
     xType STRING,
+    orderId STRING,
     shopId STRING,
 
     transactions BLOB,
@@ -40,7 +40,13 @@ function create_rest_table() {
     applicationProvider STRING,
     version STRING, 
 
+    paymentId STRING, 
+    paymentMethodType STRING, 
+    paymentStatus STRING, 
+    operationType STRING, 
+
     isTest STRING,
+    orderId STRING,
     shopId STRING,
     amount STRING,
     parentBillingTransaction STRING,

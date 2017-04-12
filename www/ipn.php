@@ -69,6 +69,10 @@ if (!file_exists(DATABASE_FILE)) die("run InitScript");
 $db = new SQLite3(DATABASE_FILE);
 
 
+//
+// Insert in payid table the details
+//
+
 $sql = "INSERT INTO payid (status, orderId, xType, shopId, transactions, id0, lastUpdateDate0, full, checked ) 
   VALUES (
     'NEW', '"
@@ -83,15 +87,23 @@ $sql = "INSERT INTO payid (status, orderId, xType, shopId, transactions, id0, la
     ."')";
 $db->exec( $sql );
 
-$sql = "INSERT INTO payment (status, answer, serverDateTime)
+//
+// Insert in payment table the details
+//
+
+
+
+$sql = "INSERT INTO payment (status, shopId, isTest, answer, serverDateTime)
   VALUES (
     'NEW', '"
+    .SQLite3::escapeString($json["shopId"])."', '"
+    .SQLite3::escapeString('true')."', '"
+
     .SQLite3::escapeString(json_encode($response))."', '"
 
     .SQLite3::escapeString('serverDateTime')
     ."')";
 $db->exec( $sql );
-
 
 
 /**
