@@ -8,7 +8,7 @@ define("DATABASE_FILE", "./database/payzen.sqlite");
 function create_rest_table() {
   $db  = new SQLite3(DATABASE_FILE);
   $db->exec(
-    "CREATE TABLE IF NOT EXISTS ipn (
+    "CREATE TABLE IF NOT EXISTS payid (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     status STRING,
